@@ -25,7 +25,7 @@ function GetSteamNorm($Steam64){
 		<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/dot-luv/jquery-ui-1.10.3.custom.min.css">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"	rel="stylesheet" type="text/css">
 	</head>
 	<body onload="sidDonate()">
 	<h1> THIS IS A TEST DONATION PAGE </h1>
@@ -35,17 +35,17 @@ function GetSteamNorm($Steam64){
 			</form>
 		</div>
 		<div class="donationform"><b =""><b =""> </b></b>
-			<form name="_xclick" action="<?php echo $payPalURL; ?>" method="post"><b =""><b =""> 
-				<input name="cmd" value="_xclick" type="hidden" /> 
+			<form name="_xclick" action="<?php echo $payPalURL; ?>" method="post"><b =""><b ="">
+				<input name="cmd" value="_xclick" type="hidden" />
 				<input name="business" value="<?php echo $payPalEmail; ?>" type="hidden" /><!--Put in your paypal e-mail in the value -->
 				<input name="item_name" value="PUDS - Game Server Donation" type="hidden" /> <!-- Rename the item_name value whatever you want, eg Donation to WullysBuilders Sandbox Server -->
 				<input name="no_shipping" value="1" type="hidden" />
 				<input name="return" value="<?php echo $website; ?>" type="hidden" /> <!--When the donation is complete it will redirect back to the specified URL -->
-				<input type="hidden" name="rm" value="2" /> 
-				<input type="hidden" name="notify_url"value="<?php echo $IPN; ?>" /><!--The paypal ipn script you downloaded in this git, replace with your website -->				
-				<input name="cn" value="Comments" type="hidden" /> 
+				<input type="hidden" name="rm" value="2" />
+				<input type="hidden" name="notify_url"value="<?php echo $IPN; ?>" /><!--The paypal ipn script you downloaded in this git, replace with your website -->
+				<input name="cn" value="Comments" type="hidden" />
 				<input name="currency_code" value="<?php echo $currency ?>" type="hidden" />
-				<input name="tax" value="0" type="hidden" /> 
+				<input name="tax" value="0" type="hidden" />
 				<input name="lc" value="GB" type="hidden" />
 				</b>
 				</b>
@@ -62,20 +62,20 @@ function GetSteamNorm($Steam64){
 									echo '<input type="radio" id="cost'.$i.'" name="amount" value="'.$cost.'">'.$ranks[$i - 1].' ('.$cost.$currency.')<br>';
 								}
 							}
-						?>							
+						?>
 						</td>
-					</tr>					
-					<tr>					
+					</tr>
+					<tr>
 						<td>
 						<?php
 
-							
+
 
 					echo '</form>';
-					try 
+					try
 					{
 						$openid = new LightOpenID($donationDir);
-						if(!$openid->mode) 
+						if(!$openid->mode)
 						{
 							echo "</td><td>";
 							echo '<p> Sign in through Steam to automatically fill in your details.</p>';
@@ -86,20 +86,20 @@ function GetSteamNorm($Steam64){
 							echo "</td></tr><tr><td>";
 							echo "<input type='hidden' name='on1' value='SteamID' maxlength='200'>(STEAM_x:x:xxxxxxxx) SteamID: </td>"; //The Players steamID, a correct ID is needed to apply the rank to the right person-->
 							echo "</td><td>";
-							echo "<input class='textboxinput' type='text' id='siddonate'  name='os1' value='$steamID' readonly>"; // Leave the name as "os1" this is also sent to paypal and used in the ipn script. -->	
-							if(isset($_GET['login'])) 
+							echo "<input class='textboxinput' type='text' id='siddonate'  name='os1' value='$steamID' readonly>"; // Leave the name as "os1" this is also sent to paypal and used in the ipn script. -->
+							if(isset($_GET['login']))
 							{
 								$openid->identity = 'http://steamcommunity.com/openid/?l=english';    // This is forcing english because it has a weird habit of selecting a random language otherwise
 								header('Location: ' . $openid->authUrl());
 							}
-						} 
-						elseif($openid->mode == 'cancel') 
+						}
+						elseif($openid->mode == 'cancel')
 						{
 							echo 'User has canceled authentication!';
-						} 
-						else 
+						}
+						else
 						{
-							if($openid->validate()) 
+							if($openid->validate())
 							{
 									$id = $openid->identity;
 									// identity is something like: http://steamcommunity.com/openid/id/76561197960435530
@@ -118,17 +118,17 @@ function GetSteamNorm($Steam64){
 										<br/>Player ID: $player->steamid
 										<br/>Player Name: $player->personaname
 										<br/>Profile URL: $player->profileurl
-										<br/>SmallAvatar: <img src='$player->avatar'/> 
-										<br/>MediumAvatar: <img src='$player->avatarmedium'/> 
-										<br/>LargeAvatar: <img src='$player->avatarfull'/> 
+										<br/>SmallAvatar: <img src='$player->avatar'/>
+										<br/>MediumAvatar: <img src='$player->avatarmedium'/>
+										<br/>LargeAvatar: <img src='$player->avatarfull'/>
 										";*/
-										$steam64 = $player->steamid;																					
-										$steamID = GetSteamNorm($steam64); //Get normal steamID		
-										#$steam = new SteamAPI($steam64);			
+										$steam64 = $player->steamid;
+										$steamID = GetSteamNorm($steam64); //Get normal steamID
+										#$steam = new SteamAPI($steam64);
 										#$friendlyName = $steam->getFriendlyName();  //Get players ingame name
 										$friendlyName = $player->personaname;  //Get players ingame name
 									}
-										
+
 
 							echo "</td><td>";
 							echo "<p> Successfully grabbed your details!</p>";
@@ -139,28 +139,28 @@ function GetSteamNorm($Steam64){
 							echo "</td></tr><tr><td>";
 							echo "<input type='hidden' name='on1' value='SteamID' maxlength='200'>(STEAM_x:x:xxxxxxxx) SteamID: </td>"; //The Players steamID, a correct ID is needed to apply the rank to the right person-->
 							echo "</td><td>";
-							echo "<input type='text' id='siddonate'  name='os1' value='$steamID' readonly>"; // Leave the name as "os1" this is also sent to paypal and used in the ipn script. -->			
+							echo "<input type='text' id='siddonate'  name='os1' value='$steamID' readonly>"; // Leave the name as "os1" this is also sent to paypal and used in the ipn script. -->
 
-							} 
-							else 
-							{								
+							}
+							else
+							{
 									echo "User is not logged in.\n";
 							}
 						}
-					} 
-					catch(ErrorException $e) 
+					}
+					catch(ErrorException $e)
 					{
 						echo $e->getMessage();
 					}
-												
+
 
 							?>
 						</td>
 					</tr>
-				</table>					
+				</table>
 				<div style="margin-top:3px;text-align: center;">
 					<input type="image" src="paypal-donate.gif" border="0" name="submit" id="submit" alt="PayPal - The safer, easier way to pay online!"><img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-				</div>			
+				</div>
 		</div>
 	</body>
 </html>
